@@ -1,14 +1,9 @@
 FROM gradle:7.2.0-jdk11 AS build
-
+USER root
 WORKDIR /app
 
 # Copy the Gradle build files and settings
-COPY build.gradle settings.gradle /app/
-COPY gradle /app/gradle
-COPY gradlew /app/
-
-# Copy the source code
-COPY src /app/src
+COPY . .
 
 # Build the Java application
 RUN ./gradlew build
@@ -22,4 +17,4 @@ WORKDIR /app
 COPY --from=build /app/build/libs/*.jar /app/
 
 # Define the command to run your Java application
-CMD ["java", "-jar", "*.jar"]
+CMD ["java", "-jar", "smart4aviation-0.0.1-SNAPSHOT.jar"]
