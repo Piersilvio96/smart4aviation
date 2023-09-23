@@ -1,0 +1,16 @@
+server:
+  port: ${SERVER_PORT:8008}
+  servlet:
+    context-path: ${SERVER_CONTEXT_PATH:/s4a}
+spring:
+  datasource:
+    username: ${DATASOURCE_USERNAME:postgres}
+    password: ${DATASOURCE_PASSWORD:postgres}
+    url: jdbc:postgresql://${DATASOURCE_HOST:localhost}:${DATASOURCE_PORT:5432}/${DATASOURCE_NAME:s4a}
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  jpa:
+    hibernate:
+      ddl-auto: update
+

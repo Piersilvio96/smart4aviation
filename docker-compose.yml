@@ -1,0 +1,33 @@
+version: '3.3'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: s4a
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  s4a:
+    image: s4a:latest
+    container_name: s4a
+    environment:
+      # SERVER DEFINITION
+      SERVER_PORT: 8008
+      SERVER_CONTEXT_PATH: /s4a
+      # DATASOURCE DEFINITION
+      DATASOURCE_HOST: postgres
+      DATASOURCE_PORT: 5434
+      DATASOURCE_NAME: s4a
+      DATASOURCE_USERNAME: postgres
+      DATASOURCE_PASSWORD: postgres
+    ports:
+      - '8008:8008'
+
+volumes:
+  postgres_data:
